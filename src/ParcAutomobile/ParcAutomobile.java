@@ -8,14 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * Classe ParcAutomobile
+ */
 public class ParcAutomobile {
     private List<Vehicule> vehicules;
 
+    /**
+     * Constructeur de la classe ParcAutomobile
+     */
     public ParcAutomobile() {
         this.vehicules = new ArrayList<>();
     }
 
+    /**
+     * Méthode ajouterVehicule
+     * @param vehicule Le véhicule à ajouter
+     */
     public void ajouterVehicule(Vehicule vehicule) {
         try {
             if (!vehicules.isEmpty()) {
@@ -32,6 +41,10 @@ public class ParcAutomobile {
         }
     }
 
+    /**
+     * Méthode supprimerVehicule
+     * @param id L'identifiant du véhicule à supprimer
+     */
     public void supprimerVehicule(String id) {
         try {
             if (vehicules.isEmpty()) {
@@ -61,6 +74,10 @@ public class ParcAutomobile {
         }
     }
 
+    /**
+     * Méthode louerVehicule
+     * @param id L'identifiant du véhicule à louer
+     */
     public void louerVehicule(String id) {
         try {
             if (vehicules.isEmpty()) {
@@ -92,6 +109,10 @@ public class ParcAutomobile {
         }
     }
 
+    /**
+     * Méthode retournerVehicule
+     * @param id L'identifiant du véhicule à retourner
+     */
     public void retournerVehicule(String id) {
         try {
             if (vehicules.isEmpty()) {
@@ -123,6 +144,10 @@ public class ParcAutomobile {
         }
     }
 
+    /**
+     * Méthode rechercherVehicule
+     * @param id L'identifiant du véhicule à rechercher
+     */
     public void rechercherVehicule(String id) {
         try {
             if (vehicules.isEmpty()) {
@@ -144,6 +169,9 @@ public class ParcAutomobile {
         }
     }
 
+    /**
+     * Méthode afficherCompact
+     */
     public void afficherCompact() {
         try {
             if (vehicules.isEmpty()) {
@@ -156,6 +184,10 @@ public class ParcAutomobile {
         }
     }
 
+    /**
+     * Méthode afficherParDisponibilite
+     * @param estDisponible Vrai si le véhicule est disponible, faux sinon
+     */
     public void afficherParDisponibilite(boolean estDisponible) {
         try {
             if (vehicules.isEmpty()) {
@@ -210,6 +242,9 @@ public class ParcAutomobile {
         }
     }
 
+    /**
+     * Méthode afficherParCategorie
+     */
     public void afficherParCategorie() {
         try {
             if (vehicules.isEmpty()) {
