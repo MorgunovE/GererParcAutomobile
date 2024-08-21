@@ -1,14 +1,14 @@
 package Vehicule;
-
+import static java.lang.Integer.parseInt;
 
 public abstract class Vehicule {
-    private int id;
+    private String id;
     private String modele;
     private String marque;
     private boolean estLoue;
 
-    public Vehicule(int id, String modele, String marque) {
-        if (id <= 0) {
+    public Vehicule(String id, String modele, String marque) {
+        if (parseInt(id) <= 0) {
             throw new IllegalArgumentException("L'ID doit être supérieur à 0");
         }
         if(modele == null || modele.isEmpty()) {
@@ -23,7 +23,7 @@ public abstract class Vehicule {
         this.estLoue = false;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

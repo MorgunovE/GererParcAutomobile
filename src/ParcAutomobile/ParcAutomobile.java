@@ -6,6 +6,7 @@ import Vehicule.Moto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ParcAutomobile {
@@ -19,7 +20,7 @@ public class ParcAutomobile {
         try {
             if (!vehicules.isEmpty()) {
                 for (Vehicule v : vehicules) {
-                    if (v.getId() == vehicule.getId()) {
+                    if (Objects.equals(v.getId(), vehicule.getId())) {
                         throw new IllegalArgumentException("Un véhicule avec cet ID existe déjà");
                     }
                 }
@@ -31,12 +32,12 @@ public class ParcAutomobile {
         }
     }
 
-    public void supprimerVehicule(int id) {
+    public void supprimerVehicule(String id) {
         try {
             if (vehicules.isEmpty()) {
                 System.out.println("La liste des véhicules est vide.");
                 return;
-            } else if( vehicules.size() == 1 && vehicules.getFirst().getId() == id) {
+            } else if( vehicules.size() == 1 && Objects.equals(vehicules.getFirst().getId(), id)) {
                 if(vehicules.removeFirst() != null) {
                     System.out.println("Véhicule [" + id + "] supprimé avec succès.");
                 } else {
@@ -45,7 +46,7 @@ public class ParcAutomobile {
                 return;
             }
             for (Vehicule v : vehicules) {
-                if (v.getId() == id) {
+                if (Objects.equals(v.getId(), id)) {
                     if(vehicules.remove(v)) {
                         System.out.println("Véhicule [" + id + "] supprimé avec succès.");
                     } else {
@@ -60,12 +61,12 @@ public class ParcAutomobile {
         }
     }
 
-    public void louerVehicule(int id) {
+    public void louerVehicule(String id) {
         try {
             if (vehicules.isEmpty()) {
                 System.out.println("La liste des véhicules est vide.");
                 return;
-            } else if (vehicules.size() == 1 && vehicules.getFirst().getId() == id) {
+            } else if (vehicules.size() == 1 && Objects.equals(vehicules.getFirst().getId(), id)) {
                 if (vehicules.getFirst().isEstLoue()) {
                     System.out.println("Le véhicule [" + id + "] est déjà loué.");
                 } else {
@@ -75,7 +76,7 @@ public class ParcAutomobile {
                 return;
             }
             for (Vehicule v : vehicules) {
-                if (v.getId() == id) {
+                if (Objects.equals(v.getId(), id)) {
                     if (v.isEstLoue()) {
                         System.out.println("Le véhicule [" + id + "] est déjà loué.");
                     } else {
@@ -91,12 +92,12 @@ public class ParcAutomobile {
         }
     }
 
-    public void retournerVehicule(int id) {
+    public void retournerVehicule(String id) {
         try {
             if (vehicules.isEmpty()) {
                 System.out.println("La liste des véhicules est vide.");
                 return;
-            } else if (vehicules.size() == 1 && vehicules.getFirst().getId() == id) {
+            } else if (vehicules.size() == 1 && Objects.equals(vehicules.getFirst().getId(), id)) {
                 if (!vehicules.getFirst().isEstLoue()) {
                     System.out.println("Le véhicule [" + id + "] n'est pas loué.");
                 } else {
@@ -106,7 +107,7 @@ public class ParcAutomobile {
                 return;
             }
             for (Vehicule v : vehicules) {
-                if (v.getId() == id) {
+                if (Objects.equals(v.getId(), id)) {
                     if (!v.isEstLoue()) {
                         System.out.println("Le véhicule [" + id + "] n'est pas loué.");
                     } else {
@@ -122,25 +123,25 @@ public class ParcAutomobile {
         }
     }
 
-    public Vehicule rechercherVehicule(int id) {
+    public void rechercherVehicule(String id) {
         try {
             if (vehicules.isEmpty()) {
                 System.out.println("La liste des véhicules est vide.");
-                return null;
-            } else if (vehicules.size() == 1 && vehicules.getFirst().getId() == id) {
-                return vehicules.getFirst();
+                return;
+            } else if (vehicules.size() == 1 && Objects.equals(vehicules.getFirst().getId(), id)) {
+                vehicules.getFirst();
+                return;
             }
             for (Vehicule v : vehicules) {
-                if (v.getId() == id) {
-                    return v;
+                if (Objects.equals(v.getId(), id)) {
+                    System.out.println(v);
+                    return;
                 }
             }
             System.out.println("Aucun véhicule avec l'ID [" + id + "] n'a été trouvé.");
-            return null;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
     }
 
     public void afficherCompact() {
@@ -149,7 +150,7 @@ public class ParcAutomobile {
                 System.out.println("La liste des véhicules est vide.");
                 return;
             }
-            vehicules.forEach(System.out::println);
+            vehicules.forEach(v -> System.out.println("ID : " + v.getId() + ", Marque: " + v.getMarque() + ", Modèle: " + v.getModele()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -163,7 +164,7 @@ public class ParcAutomobile {
             }
             if (estDisponible) {
                 if (vehicules.size() == 1 && !vehicules.getFirst().isEstLoue()) {
-                    System.out.println("Véhicules Disponibles:");
+                    System.out.println("\nVéhicules Disponibles:");
                     System.out.println(vehicules.getFirst());
                     return;
                 } else if (vehicules.size() == 1 && vehicules.getFirst().isEstLoue()) {
@@ -177,14 +178,14 @@ public class ParcAutomobile {
                     }
                 }
                 if (!vehiculesDisponibles.isEmpty()) {
-                    System.out.println("Véhicules Disponibles:");
+                    System.out.println("\nVéhicules Disponibles:");
                     vehiculesDisponibles.forEach(System.out::println);
                 } else {
                     System.out.println("Aucun véhicule disponible.");
                 }
             } else {
                 if (vehicules.size() == 1 && vehicules.getFirst().isEstLoue()) {
-                    System.out.println("Véhicules Non Disponibles:");
+                    System.out.println("\nVéhicules Non Disponibles:");
                     System.out.println(vehicules.getFirst());
                     return;
                 } else if (vehicules.size() == 1 && !vehicules.getFirst().isEstLoue()) {
@@ -198,7 +199,7 @@ public class ParcAutomobile {
                     }
                 }
                 if (!vehiculesNonDisponibles.isEmpty()) {
-                    System.out.println("Véhicules Non Disponibles:");
+                    System.out.println("\nVéhicules Non Disponibles:");
                     vehiculesNonDisponibles.forEach(System.out::println);
                 } else {
                     System.out.println("Aucun véhicule non disponible.");
@@ -216,15 +217,15 @@ public class ParcAutomobile {
                 return;
             }
             if(vehicules.size() == 1 && vehicules.getFirst() instanceof Voiture) {
-                System.out.println("Voitures:");
+                System.out.println("\nVoitures:");
                 vehicules.stream().filter(v -> v instanceof Voiture).forEach(System.out::println);
                 return;
             } else if (vehicules.size() == 1 && vehicules.getFirst() instanceof Camion) {
-                System.out.println("Camions:");
+                System.out.println("\nCamions:");
                 vehicules.stream().filter(v -> v instanceof Camion).forEach(System.out::println);
                 return;
             } else if (vehicules.size() == 1 && vehicules.getFirst() instanceof Moto) {
-                System.out.println("Motos:");
+                System.out.println("\nMotos:");
                 vehicules.stream().filter(v -> v instanceof Moto).forEach(System.out::println);
                 return;
             }
@@ -244,15 +245,15 @@ public class ParcAutomobile {
             }
 
             if (!vehiculesVoiture.isEmpty()) {
-                System.out.println("Voitures:");
+                System.out.println("\nVoitures:");
                 vehiculesVoiture.forEach(System.out::println);
             }
             if (!vehiculesCamion.isEmpty()) {
-                System.out.println("Camions:");
+                System.out.println("\nCamions:");
                 vehiculesCamion.forEach(System.out::println);
             }
             if (!vehiculesMoto.isEmpty()) {
-                System.out.println("Motos:");
+                System.out.println("\nMotos:");
                 vehiculesMoto.forEach(System.out::println);
             }
 
