@@ -155,23 +155,54 @@ public class ParcAutomobile {
         }
     }
 
-    public void afficherParDisponibilite() {
+    public void afficherParDisponibilite(boolean estDisponible) {
         try {
             if (vehicules.isEmpty()) {
                 System.out.println("La liste des véhicules est vide.");
                 return;
-            } else if (vehicules.size() == 1 && vehicules.getFirst().isEstLoue()) {
-                System.out.println("Aucun véhicule disponible.");
             }
-            boolean aucunVehiculeDisponible = true;
-            for (Vehicule v : vehicules) {
-                if (!v.isEstLoue()) {
-                    System.out.println(v);
-                    aucunVehiculeDisponible = false;
+            if (estDisponible) {
+                if (vehicules.size() == 1 && !vehicules.getFirst().isEstLoue()) {
+                    System.out.println("Véhicules Disponibles:");
+                    System.out.println(vehicules.getFirst());
+                    return;
+                } else if (vehicules.size() == 1 && vehicules.getFirst().isEstLoue()) {
+                    System.out.println("Aucun véhicule disponible.");
+                    return;
                 }
-            }
-            if (aucunVehiculeDisponible) {
-                System.out.println("Aucun véhicule disponible.");
+                List<Vehicule> vehiculesDisponibles = new ArrayList<>();
+                for (Vehicule v : vehicules) {
+                    if (!v.isEstLoue()) {
+                        vehiculesDisponibles.add(v);
+                    }
+                }
+                if (!vehiculesDisponibles.isEmpty()) {
+                    System.out.println("Véhicules Disponibles:");
+                    vehiculesDisponibles.forEach(System.out::println);
+                } else {
+                    System.out.println("Aucun véhicule disponible.");
+                }
+            } else {
+                if (vehicules.size() == 1 && vehicules.getFirst().isEstLoue()) {
+                    System.out.println("Véhicules Non Disponibles:");
+                    System.out.println(vehicules.getFirst());
+                    return;
+                } else if (vehicules.size() == 1 && !vehicules.getFirst().isEstLoue()) {
+                    System.out.println("Aucun véhicule non disponible.");
+                    return;
+                }
+                List<Vehicule> vehiculesNonDisponibles = new ArrayList<>();
+                for (Vehicule v : vehicules) {
+                    if (v.isEstLoue()) {
+                        vehiculesNonDisponibles.add(v);
+                    }
+                }
+                if (!vehiculesNonDisponibles.isEmpty()) {
+                    System.out.println("Véhicules Non Disponibles:");
+                    vehiculesNonDisponibles.forEach(System.out::println);
+                } else {
+                    System.out.println("Aucun véhicule non disponible.");
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
