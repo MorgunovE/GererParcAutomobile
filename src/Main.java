@@ -5,8 +5,11 @@ import Vehicule.Voiture;
 
 public class Main {
     public static void main(String[] args) {
+
+        // Création d'un parc automobile
         ParcAutomobile parc = new ParcAutomobile();
 
+        // Ajout de véhicules au parc
         parc.ajouterVehicule(new Voiture("001", "Civic", "Honda", 4));
         parc.ajouterVehicule(new Camion("101", "F-150", "Ford", 1000));
         parc.ajouterVehicule(new Moto("201", "Ninja", "Kawasaki", 600));
