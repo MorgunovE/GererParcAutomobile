@@ -1,6 +1,6 @@
 package Vehicule;
 
-// Classe pour les camions
+
 public class Camion extends Vehicule {
     private int capaciteDeChargement;
 
