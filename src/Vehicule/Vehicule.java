@@ -20,13 +20,16 @@ public abstract class Vehicule {
         if (parseInt(id) <= 0) {
             throw new IllegalArgumentException("L'ID doit être supérieur à 0");
         }
+        if (id.isEmpty()) {
+            throw new IllegalArgumentException("L'ID ne peut pas être vide");
+        }
         if(modele == null || modele.isEmpty()) {
             throw new IllegalArgumentException("Le modèle ne peut pas être vide");
         }
         if(marque == null || marque.isEmpty()) {
             throw new IllegalArgumentException("La marque ne peut pas être vide");
         }
-        this.id = id;
+        this.id = id.trim();
         this.modele = modele.trim();
         this.marque = marque.trim();
         this.estLoue = false;
